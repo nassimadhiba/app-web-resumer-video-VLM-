@@ -1,67 +1,48 @@
-Résumé Vidéo Automatique avec API Flask + Intégration Laravel
+Résumé Vidéo Automatique
+Description
 
-Ce projet permet de résumer automatiquement une vidéo en combinant transcription audio, analyse visuelle et génération de résumé textuel, puis en créant une vidéo résumée avec narration audio. Il inclut également une application Laravel pour consommer cette API.
+Ce projet permet de résumer automatiquement une vidéo en combinant transcription audio, analyse visuelle et génération de résumé textuel, puis en créant une vidéo résumée avec narration audio.
 
-Fonctionnalités principales
-1. Traitement vidéo avec Flask
+Le projet peut être utilisé facilement via une API Flask et exposé publiquement pour des tests ou pour une intégration web grâce à ngrok.
 
-Extraction des frames : Capture des images clés de la vidéo.
+Fonctionnalités
 
-Génération de légendes (captions) : Utilise BLIP pour décrire chaque frame.
+Extraction des frames : Capture d’images à intervalles réguliers pour représenter le contenu visuel de la vidéo.
 
-Transcription audio : Utilise Whisper pour convertir la piste audio en texte.
+Génération de légendes : Utilisation de BLIP (Salesforce/blip-image-captioning-base) pour générer des descriptions textuelles pour chaque image.
 
-Résumé du contenu : Combine les légendes et la transcription pour générer un résumé via BART.
+Transcription audio : Whisper convertit automatiquement l’audio de la vidéo en texte.
 
-Création de la vidéo résumée : Synchronisation des frames avec l’audio généré via gTTS.
+Résumé textuel : BART (facebook/bart-large-cnn) crée un résumé combinant transcription audio et légendes visuelles.
 
-API Flask : Route /upload_video pour uploader une vidéo et recevoir la vidéo résumée.
+Vidéo résumée avec audio narratif : gTTS transforme le résumé en audio, synchronisé avec les images via MoviePy.
 
-Exposition publique : Utilisation de ngrok pour accéder à l’API depuis Internet.
+API Flask : Route /upload_video pour uploader une vidéo et obtenir le résumé.
 
-2. Application Laravel
+Exposition publique : Ngrok rend l’API accessible sur Internet pour tests ou intégration web.
 
-Frontend pour uploader la vidéo depuis un navigateur.
+Technologies et Outils
 
-Consommation de l’API Flask via HTTP POST (/upload_video).
+Langages : Python
 
-Affichage du lien ou téléchargement de la vidéo résumée.
+Frameworks et API :
 
-Optionnel : Historique des vidéos uploadées et résumées.
+Flask → Création de l’API
 
-Dépendances
-Flask / Python
+Flask-Ngrok / Pyngrok → Exposition publique de l’API
 
-flask, flask-ngrok, pyngrok
+Deep Learning & NLP :
 
-torch, transformers (BLIP et BART)
+Torch / Transformers → BLIP et BART pour analyse visuelle et résumé
 
-whisper
+Whisper → Transcription audio
 
-opencv-python, Pillow
+Traitement vidéo et audio :
 
-moviepy, gTTS
+OpenCV / Pillow → Extraction et traitement des frames
 
-Laravel / PHP
+MoviePy → Montage vidéo et synchronisation audio
 
-Laravel 10+
+gTTS → Conversion du texte en narration audio
 
-GuzzleHttp pour les requêtes API
-
-Frontend Blade / Bootstrap pour l’upload et affichage des vidéos
-
-Pipeline de traitement
-
-Upload vidéo depuis Laravel → API Flask (/upload_video).
-
-Extraction des frames par Flask.
-
-Génération des captions pour chaque frame.
-
-Transcription audio.
-
-Résumé textuel combinant captions + transcription.
-
-Création vidéo résumée avec narration.
-
-Retour du fichier vidéo à Laravel pour téléchargement ou lecture.
+Environnement & Déploiement :
