@@ -1,5 +1,5 @@
-**Résumé Vidéo Automatique**
-Description
+ # Résumé Vidéo Automatique
+**Description**
 
 Ce projet permet de résumer automatiquement une vidéo en combinant transcription audio, analyse visuelle et génération de résumé textuel, puis en créant une vidéo résumée avec narration audio.
 
