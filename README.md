@@ -1,11 +1,11 @@
-Résumé Vidéo Automatique
+**Résumé Vidéo Automatique**
 Description
 
 Ce projet permet de résumer automatiquement une vidéo en combinant transcription audio, analyse visuelle et génération de résumé textuel, puis en créant une vidéo résumée avec narration audio.
 
 Le projet peut être utilisé facilement via une API Flask et exposé publiquement pour des tests ou pour une intégration web grâce à ngrok.
 
-Fonctionnalités
+**Fonctionnalités**
 
 Extraction des frames : Capture d’images à intervalles réguliers pour représenter le contenu visuel de la vidéo.
 
@@ -21,7 +21,7 @@ API Flask : Route /upload_video pour uploader une vidéo et obtenir le résumé.
 
 Exposition publique : Ngrok rend l’API accessible sur Internet pour tests ou intégration web.
 
-Technologies et Outils
+**Technologies et Outils**
 
 Langages : Python
 
@@ -45,4 +45,6 @@ MoviePy → Montage vidéo et synchronisation audio
 
 gTTS → Conversion du texte en narration audio
 
-Environnement & Déploiement :
+**Environnement & Déploiement** :
+
+Google Colab / VS Code → Développement et tests
