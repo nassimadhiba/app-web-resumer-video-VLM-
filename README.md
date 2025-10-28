@@ -1,61 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Résumé Vidéo Automatique avec API Flask + Intégration Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Ce projet permet de résumer automatiquement une vidéo en combinant transcription audio, analyse visuelle et génération de résumé textuel, puis en créant une vidéo résumée avec narration audio. Il inclut également une application Laravel pour consommer cette API.
 
-## About Laravel
+Fonctionnalités principales
+1. Traitement vidéo avec Flask
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Extraction des frames : Capture des images clés de la vidéo.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Génération de légendes (captions) : Utilise BLIP pour décrire chaque frame.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Transcription audio : Utilise Whisper pour convertir la piste audio en texte.
 
-## Learning Laravel
+Résumé du contenu : Combine les légendes et la transcription pour générer un résumé via BART.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Création de la vidéo résumée : Synchronisation des frames avec l’audio généré via gTTS.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+API Flask : Route /upload_video pour uploader une vidéo et recevoir la vidéo résumée.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Exposition publique : Utilisation de ngrok pour accéder à l’API depuis Internet.
 
-## Laravel Sponsors
+2. Application Laravel
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Frontend pour uploader la vidéo depuis un navigateur.
 
-### Premium Partners
+Consommation de l’API Flask via HTTP POST (/upload_video).
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Affichage du lien ou téléchargement de la vidéo résumée.
 
-## Contributing
+Optionnel : Historique des vidéos uploadées et résumées.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Dépendances
+Flask / Python
 
-## Code of Conduct
+flask, flask-ngrok, pyngrok
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+torch, transformers (BLIP et BART)
 
-## Security Vulnerabilities
+whisper
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+opencv-python, Pillow
 
-## License
+moviepy, gTTS
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Laravel / PHP
+
+Laravel 10+
+
+GuzzleHttp pour les requêtes API
+
+Frontend Blade / Bootstrap pour l’upload et affichage des vidéos
+
+Pipeline de traitement
+
+Upload vidéo depuis Laravel → API Flask (/upload_video).
+
+Extraction des frames par Flask.
+
+Génération des captions pour chaque frame.
+
+Transcription audio.
+
+Résumé textuel combinant captions + transcription.
+
+Création vidéo résumée avec narration.
+
+Retour du fichier vidéo à Laravel pour téléchargement ou lecture.
